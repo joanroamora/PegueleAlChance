@@ -25,13 +25,10 @@ if __name__ == "__main__":
     font=('arial', 10) , anchor="center").place(x=38,y=75)
 
 
-    num = IntVar ()
-    cuadroEntrada = Entry(unFrame, width=6, cursor="trek", font=('arial', 20)).place(x=120,y=165)
-    cuadroEntrada = Entry(textvariable=num)
-
-    botonEnviar = Button(unFrame, text="PÉGUELE AL CHANCE").place(x=105,y=215)
-
-    raiz.mainloop()
+    num = StringVar ()
+    cuadroEntrada = Entry(unFrame, width=6, cursor="trek",textvariable=num, font=('arial', 20)).place(x=120,y=165)
+    string_control = ""
+    string_control = num.get()
 
     primerDig = random.randint(0,9)
     segunDig = random.randint(0,9)
@@ -39,27 +36,29 @@ if __name__ == "__main__":
     cuartoDig = random.randint(0,9)
 
     sumaDigMachine = (primerDig * 1000)+(segunDig * 100)+(tercerDig*10)+(cuartoDig*1)
-    intento = 0
-    while True:
-        entradaDig = input ('Por favor ingrese su número ganador :')
+
+    
+    def funcion():
         ##List comprehensions
-        x = [int(a) for a in str(entradaDig)]
+        x = [int(a) for a in str(string_control)]
         print(x)
         sumaDigUser = (x[0] * 1000) + (x[1] * 100) + (x[2] * 10) + (x[3] * 1)
-        1231
         if sumaDigUser > sumaDigMachine:
-            print ("¡Réstele!")
-            intento = intento + 1
-            print (intento)
+            return ("¡Réstele!")
         elif sumaDigUser < sumaDigMachine:
-            print ("¡Súmele!")
+            return ("¡Súmele!")
             intento = intento + 1
-            print (intento)
+            return (intento)
         else:
-            if ( x[0] == 0 ): {
-            print ("El numero ganador es: " + f'0{sumaDigMachine}' + " vaya y lo hace!!!")
-            }
-            else: {
-            print ("El numero ganador es: " + f'{sumaDigMachine}' + " vaya y lo hace!!!")
-            }
-            break
+            if ( x[0] == 0 ): 
+                return ("El numero ganador es: " + f'0{sumaDigMachine}' + " vaya y lo hace!!!")
+            
+            else: 
+                return ("El numero ganador es: " + f'{sumaDigMachine}' + " vaya y lo hace!!!")
+            
+    
+    
+    botonEnviar = Button(unFrame, text="PÉGUELE AL CHANCE", command= funcion).place(x=105,y=215)
+
+    miLabel3=Label(unFrame, text="El Genio Virtual", bg = "black", fg="white", font=('arial', 18)).place(x=80,y=30)
+    raiz.mainloop()
